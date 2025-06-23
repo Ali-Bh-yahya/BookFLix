@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Register Form -->
+    <div class="col-md-6">
+      <h2>Register</h2>
+      <form method="POST" action="/">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" class="form-control" id="age" name="age" required>
+        </div>
+
+        <div class="form-group">
+          <label for="birthday">Birthday</label>
+          <input type="date" class="form-control" id="birthday" name="birthday" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password1">Password</label>
+          <input type="password" class="form-control" id="password1" name="password1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input type="password" class="form-control" id="password2" name="password2" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+      </form>
+    </div>
+
+    <!-- Login Form -->
+    <div class="col-md-6">
+      <h2>Login</h2>
+      <form method="POST" action="/login/">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="login_email">Email</label>
+          <input type="email" class="form-control" id="login_email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="login_password">Password</label>
+          <input type="password" class="form-control" id="login_password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Message Display -->
+  <div class="row mt-4">
+    <div class="col-12">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
