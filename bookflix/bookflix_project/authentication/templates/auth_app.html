@@ -73,6 +73,19 @@
       </form>
     </div>
   </div>
+    <!-- Error Display -->
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for field, errors in form.errors.items %}
+          {% for error in errors %}
+            <li><strong>{{ field|capfirst }}</strong>: {{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
 
   <!-- Message Display -->
   <div class="row mt-4">

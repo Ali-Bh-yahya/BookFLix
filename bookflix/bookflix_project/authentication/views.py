@@ -2,8 +2,9 @@ from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth import login
 
-import authentication
+
 from .forms import LoginForm, RegistrationForm  
+from django.contrib.auth import authenticate
 
 
 def register(request):
@@ -18,7 +19,7 @@ def register(request):
             messages.error(request, 'Registration failed. Please correct the errors below.')
     else:
         form = RegistrationForm ()
-    return render(request, 'authentication/auth_app.html', {'form': form})
+    return render(request, 'auth_app.html', {'form': form})
         
 
 def login_view(request):
@@ -27,7 +28,7 @@ def login_view(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = authentication(request, email=email, password=password)
+            user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Login successful.')
@@ -36,4 +37,4 @@ def login_view(request):
                 messages.error(request, 'Invalid email or password.')
     else:
         form = LoginForm()
-    return render(request, 'authentication/auth_app.html', {'form': form})
+    return render(request, 'auth_app.html', {'form': form})
